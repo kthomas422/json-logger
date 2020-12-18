@@ -9,10 +9,15 @@ type Logger struct {
 	output io.Writer
 }
 
-// Log is an interface for writing info or error messages to the output.
-// See the simple.go for an example.
-type Log interface {
+// InfoLog is an interface for writing info messages to the output.
+// See simple.go for an example.
+type InfoLog interface {
 	WriteInfo(io.Writer) error
+}
+
+// ErrorLog is an interface for writing error messages to the output.
+// See simple.go for an example.
+type ErrLog interface {
 	WriteError(io.Writer) error
 }
 
@@ -27,11 +32,11 @@ func NewLogger(output io.Writer) *Logger {
 }
 
 // Info writes an "informational" message to the log output
-func (l *Logger) Info(lg Log) error {
+func (l *Logger) Info(lg InfoLog) error {
 	return lg.WriteInfo(l.output)
 }
 
 // Error writes an "error" message to the log output
-func (l *Logger) Error(lg Log) error {
+func (l *Logger) Error(lg ErrorLog) error {
 	return lg.WriteError(l.output)
 }
