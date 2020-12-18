@@ -37,6 +37,6 @@ func (l *Logger) Info(lg InfoLog) error {
 }
 
 // Error writes an "error" message to the log output
-func (l *Logger) Error(lg ErrorLog) error {
+func (l *Logger) Error(lg ErrLog) error {
 	return lg.WriteError(l.output)
 }
